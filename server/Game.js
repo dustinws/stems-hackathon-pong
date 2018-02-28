@@ -24,6 +24,7 @@ class Game {
   }
 
   addPlayer(player) {
+    if (this.players.length > 1) return this;
     this.players.push(player);
     switch (this.players.length) {
       case 1: return player.setPosition(10, 300);
