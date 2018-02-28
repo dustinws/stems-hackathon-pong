@@ -71,18 +71,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/game-loop.js":
-/*!*****************************!*\
-  !*** ./client/game-loop.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = gameLoop;\nfunction gameLoop() {\n  // eslint-disable-next-line no-console\n  console.log('Running');\n  requestAnimationFrame(gameLoop);\n}\n\n//# sourceURL=webpack:///./client/game-loop.js?");
-
-/***/ }),
-
 /***/ "./client/index.js":
 /*!*************************!*\
   !*** ./client/index.js ***!
@@ -91,7 +79,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _gameLoop = __webpack_require__(/*! ./game-loop */ \"./client/game-loop.js\");\n\nvar _gameLoop2 = _interopRequireDefault(_gameLoop);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nio(); /* global io */\n\n(0, _gameLoop2.default)();\n\n//# sourceURL=webpack:///./client/index.js?");
+eval("\n\n/* global io */\n\n// import gameLoop from './game-loop';\n\nio();\n\n// const state = {};\n\nvar contentNode = document.getElementById('content');\n\nvar usernameNode = document.getElementById('username');\n// const usernameField = document.getElementById('username-field');\nvar usernameSubmit = document.getElementById('username-submit');\n\n// const choiceNode = document.getElementById('choice');\n// const createNode = document.getElementById('choice-create');\n// const joinNode = document.getElementById('choice-join');\n// const canvasNode = document.getElementById('canvas');\n\n// First, put the username form inside the content div.\ncontentNode.innerHTML = usernameNode.innerHTML;\n// eslint-disable-next-line\nconsole.log(usernameSubmit);\n// Bind Listeners\n// eslint-disable-next-line no-console\nusernameSubmit.addEventListener('click', console.log);\n\n// Listeners\n\n// function addUsername() {\n//   // eslint-disable-next-line no-console\n//   console.log('YEA');\n//   // event.preventDefault();\n//\n//   state.username = usernameField.value;\n//   usernameField.value = '';\n//   // eslint-disable-next-line\n//   console.log(state);\n//\n//   contentNode.innerHTML = choiceNode.innerHTML;\n// }\n\n//# sourceURL=webpack:///./client/index.js?");
 
 /***/ })
 

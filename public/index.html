@@ -2,10 +2,38 @@
   <head>
     <style>
       canvas { background-color: black; }
+      .hidden { display: none; }
     </style>
   </head>
   <body>
-    <canvas width=600 height=600></canvas>
+    <div id="content"></div>
+
+    <!-- The view where you enter your username -->
+    <div class="hidden" id="username">
+      <input id="username-field" type="text" placeholder="Please enter a username"></input>
+      <button id="username-submit">Go!</button>
+    </div>
+
+    <!-- The view to choose whether to create or join -->
+    <div id="choice" class="hidden">
+
+    </div>
+
+    <!-- The view to create a game -->
+    <div id="choice-create" class="hidden">
+      <input placeholder="What would you like to call your game?" />
+    </div>
+
+    <!-- The view to join a game -->
+    <div id="choice-join" class="hidden">
+      <input placeholder="What game would you like to join?" />
+    </div>
+
+    <!-- The actual game route -->
+    <div id="canvas" class="hidden">
+      <canvas width=600 height=600></canvas>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/app.js"></script>
   </body>
