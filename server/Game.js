@@ -34,8 +34,11 @@ class Game {
     return this;
   }
 
-  removePlayer(player) {
-    this.players = this.players.filter(p => p !== player);
+  removePlayer(socketID) {
+    const existingPlayer = this.players.find(p => p.socket === socketID);
+    if (existingPlayer) {
+      this.players = this.players.filter(p => p.socket !== socketID);
+    }
   }
 
   updateBall(x, y) {
