@@ -12,7 +12,7 @@ const io = IO(server);
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-let game = new Game('main');
+const game = new Game('main');
 
 io.on('connection', (socket) => {
   // eslint-disable-next-line no-console
@@ -25,19 +25,17 @@ io.on('connection', (socket) => {
 
     game.addPlayer(player);
     // eslint-disable-next-line
-    console.log(game);
     io.emit('update-client', JSON.stringify(game));
   });
 
   socket.on('update-server', (newGame) => {
-    game = JSON.parse(newGame);
+    Object.assign(game, JSON.parse(newGame));
+    console.log(game.players.map(p => p.paddle)); // eslint-disable-line
     io.emit('update-client', newGame);
   });
 
   socket.on('disconnect', () => {
     game.removePlayer(socket.id);
-
-    console.log('GAME', game); // eslint-disable-line no-console
   });
 });
 

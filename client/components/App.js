@@ -12,6 +12,7 @@ export default class App extends React.Component {
       page: 'username',
       player: null,
       game: null,
+      username: '',
     };
 
     this.setUsername = this.setUsername.bind(this);
@@ -21,7 +22,9 @@ export default class App extends React.Component {
     socket.emit('game:join', username);
 
     socket.on('update-client', (newGame) => {
+      console.log('New Game!', JSON.parse(newGame)); // eslint-disable-line
       this.setState({
+        username,
         game: JSON.parse(newGame),
         page: 'game',
       });
@@ -29,9 +32,18 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.page === 'username') {
+    if (this.state.page === 'username') {
       return <UsernameForm onSubmit={this.setUsername} />;
     }
-    return <Game />;
+    if (this.state.page === 'game') {
+      return (
+        <Game
+          socket={socket}
+          game={this.state.game}
+          player={this.state.game.players.find(p => p.username === this.state.username)}
+        />
+      );
+    }
+    return '';
   }
 }
