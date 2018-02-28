@@ -28,7 +28,7 @@ class Game {
     this.players.push(player);
     switch (this.players.length) {
       case 1: return player.setPosition(10, 300);
-      case 2: return player.setPosition(590, 300);
+      case 2: return player.setPosition(580, 300);
       default: break;
     }
     return this;
