@@ -1,9 +1,9 @@
 const Coordinate = require('./Coordinate');
 
 class Player {
-  constructor(username, socket) {
+  constructor(username, socketID) {
     this.username = username;
-    this.socket = socket;
+    this.socket = socketID;
     this.inGame = false;
     this.pos = new Coordinate(0, 0);
     this.score = 0;

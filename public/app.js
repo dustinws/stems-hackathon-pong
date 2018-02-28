@@ -71,18 +71,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/game-loop.js":
-/*!*****************************!*\
-  !*** ./client/game-loop.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = gameLoop;\nfunction gameLoop() {\n  // eslint-disable-next-line no-console\n  console.log('Running');\n  requestAnimationFrame(gameLoop);\n}\n\n//# sourceURL=webpack:///./client/game-loop.js?");
-
-/***/ }),
-
 /***/ "./client/index.js":
 /*!*************************!*\
   !*** ./client/index.js ***!
@@ -91,7 +79,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _gameLoop = __webpack_require__(/*! ./game-loop */ \"./client/game-loop.js\");\n\nvar _gameLoop2 = _interopRequireDefault(_gameLoop);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nio(); /* global io */\n\n(0, _gameLoop2.default)();\n\n//# sourceURL=webpack:///./client/index.js?");
+eval("\n\n/* global io, location */\n\n// import gameLoop from './game-loop';\n\nvar socket = io();\nvar game = void 0;\nvar username = window.location.hash.replace('#', '');\n\nsocket.emit('game:join', username);\n\nsocket.on('update-client', function (newGame) {\n  game = JSON.parse(newGame);\n  // eslint-disable-next-line\n  console.log(game);\n});\n\n// eslint-disable-next-line\nsocket.on('error', function (err) {\n  return alert(err);\n});\n\n// gameLoop();\n\n//# sourceURL=webpack:///./client/index.js?");
 
 /***/ })
 

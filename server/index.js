@@ -12,67 +12,36 @@ const io = IO(server);
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
-let users = [];
-const games = {};
-
-// const getConnection = (sock) =>
-// users.find(s => s.socket === sock);
-
-const broadcastGame = (gameID) => {
-  const game = games[gameID];
-
-  if (!game) {
-    throw new Error(`Couldn't find game with game id "${gameID}"`);
-  }
-
-  game.players.forEach((player) => {
-    player.socket.emit('update', game);
-  });
-};
+let game = new Game('main');
 
 io.on('connection', (socket) => {
   // eslint-disable-next-line no-console
   console.log('New Socket!');
-  users.push({
-    socket,
-    inGame: false,
-  });
 
-  socket.on('game:join', (gameID, username) => {
-    if (!games[gameID]) {
-      socket.emit('error', 'The game you selected does not exist');
-    }
-
-    const game = games[gameID];
-    const player = new Player(username, socket);
+  socket.on('game:join', (username) => {
+    const player = new Player(username, socket.id);
 
     player.inGame = true;
 
     game.addPlayer(player);
-
-    broadcastGame(gameID);
+    // eslint-disable-next-line
+    console.log(game);
+    io.emit('update-client', JSON.stringify(game));
   });
 
-  socket.on('game:create', (gameID, username) => {
-    if (games[gameID]) {
-      return socket.emit('error', 'The game you selected does already exist');
-    }
-
-    games[gameID] = new Game(gameID);
-    games[gameID].addPlayer(new Player(username, socket));
-
-    return broadcastGame(gameID);
+  socket.on('update-server', (newGame) => {
+    game = JSON.parse(newGame);
+    io.emit('update-client', newGame);
   });
 
-  socket.on('disconnect', (...args) => {
+  socket.on('disconnect', () => {
     // eslint-disable-next-line no-console
-    console.log('disconnect', ...args);
-    users = users.filter(s => s.socket !== socket);
-  });
-});
+    const player = game.players.find(p => p.socket === socket.id);
+    game.removePlayer(player);
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
+    console.log(`Player ${player.username} disconnected.`);  // eslint-disable-line
+    console.log('GAME', game); // eslint-disable-line no-console
+  });
 });
 
 server.listen(3000);
