@@ -1,9 +1,11 @@
 module.exports = {
-  extends: 'airbnb-base',
+  "extends": "airbnb",
   env: {
     browser: true,
   },
   rules: {
-    'no-use-before-define': 0,
+    "react/jsx-filename-extension": 0,
+    "react/no-unused-state": 0,
+    "react/prop-types": 0
   },
 };
