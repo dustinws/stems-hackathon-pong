@@ -25,13 +25,12 @@ class Game {
 
   addPlayer(player) {
     this.players.push(player);
-    // switch (this.players.length) {
-    //   case 1: return player.setPosition(10, 300);
-    //   case 2: return player.setPosition(590, 300);
-    //   case 3: return player.setPosition(300, 590);
-    //   case 4: return player.setPosition(300, 10);
-    //   default: break;
-    // }
+    switch (this.players.length) {
+      case 1: return player.setPosition(10, 300);
+      case 2: return player.setPosition(590, 300);
+      default: break;
+    }
+    return this;
   }
 
   removePlayer(player) {
