@@ -4,3 +4,6 @@ class Coordinate {
     this.y = y;
   }
 }
+
+module.exports = Coordinate;
+

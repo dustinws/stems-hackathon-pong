@@ -1,3 +1,5 @@
+const Coordinate = require('./Coordinate');
+
 class Player {
   constructor(username, socket) {
     this.username = username;
@@ -16,3 +18,6 @@ class Player {
     this.score = score;
   }
 }
+
+module.exports = Player;
+

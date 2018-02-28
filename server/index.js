@@ -1,30 +1,37 @@
 const path = require('path');
 const express = require('express');
+const { Server } = require('http');
+const IO = require('socket.io');
+
+const Game = require('./Game');
+const Player = require('./Player');
+
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const server = Server(app);
+const io = IO(server);
 
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 let users = [];
-let games = {};
+const games = {};
 
-const getConnection = (sock) =>
-  users.find(s => s.socket = sock);
+// const getConnection = (sock) =>
+// users.find(s => s.socket === sock);
 
 const broadcastGame = (gameID) => {
   const game = games[gameID];
 
-  if(!game) {
+  if (!game) {
     throw new Error(`Couldn't find game with game id "${gameID}"`);
   }
 
   game.players.forEach((player) => {
     player.socket.emit('update', game);
   });
-}
+};
 
 io.on('connection', (socket) => {
+  // eslint-disable-next-line no-console
   console.log('New Socket!');
   users.push({
     socket,
@@ -38,7 +45,7 @@ io.on('connection', (socket) => {
 
     const game = games[gameID];
     const player = new Player(username, socket);
-    
+
     player.inGame = true;
 
     game.addPlayer(player);
@@ -54,17 +61,18 @@ io.on('connection', (socket) => {
     games[gameID] = new Game(gameID);
     games[gameID].addPlayer(new Player(username, socket));
 
-    broadcastGame(gameID);
+    return broadcastGame(gameID);
   });
 
   socket.on('disconnect', (...args) => {
+    // eslint-disable-next-line no-console
     console.log('disconnect', ...args);
     users = users.filter(s => s.socket !== socket);
   });
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
-})
- 
+  res.send('Hello World');
+});
+
 server.listen(3000);

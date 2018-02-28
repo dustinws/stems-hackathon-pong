@@ -79,7 +79,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = gameLoop;\nfunction gameLoop() {\n  console.log('Running');\n  requestAnimationFrame(gameLoop);\n}\n\n//# sourceURL=webpack:///./client/game-loop.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = gameLoop;\nfunction gameLoop() {\n  // eslint-disable-next-line no-console\n  console.log('Running');\n  requestAnimationFrame(gameLoop);\n}\n\n//# sourceURL=webpack:///./client/game-loop.js?");
 
 /***/ }),
 

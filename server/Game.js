@@ -1,4 +1,4 @@
-import { userInfo } from "os";
+const Coordinate = require('./Coordinate');
 
 const states = {
   WAITING: 'WAITING',
@@ -12,7 +12,7 @@ class Game {
     this.id = id;
     this.players = [];
     this.state = states.WAITING;
-    this.ball = new Coordinate(300, 300)
+    this.ball = new Coordinate(300, 300);
   }
 
   startCountdown() {
@@ -25,12 +25,14 @@ class Game {
 
   addPlayer(player) {
     this.players.push(player);
-    switch(this.players.length) {
-      case 1: player.setPosition(10, 300);
-      case 2: player.setPosition(590, 300);
-      case 3: player.setPosition(300, 590);
-      case 4: player.setPosition(300, 10);
+    switch (this.players.length) {
+      case 1: return player.setPosition(10, 300);
+      case 2: return player.setPosition(590, 300);
+      case 3: return player.setPosition(300, 590);
+      case 4: return player.setPosition(300, 10);
+      default: break;
     }
+    return this;
   }
 
   updateBall(x, y) {
@@ -50,3 +52,6 @@ class Game {
     this.getUserByUsername(username).setScore(score);
   }
 }
+
+module.exports = Game;
+
