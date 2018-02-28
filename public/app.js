@@ -91,7 +91,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _gameLoop = __webpack_require__(/*! ./game-loop */ \"./client/game-loop.js\");\n\nvar _gameLoop2 = _interopRequireDefault(_gameLoop);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n(0, _gameLoop2.default)();\n\n//# sourceURL=webpack:///./client/index.js?");
+eval("\n\nvar _gameLoop = __webpack_require__(/*! ./game-loop */ \"./client/game-loop.js\");\n\nvar _gameLoop2 = _interopRequireDefault(_gameLoop);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nio(); /* global io */\n\n(0, _gameLoop2.default)();\n\n//# sourceURL=webpack:///./client/index.js?");
 
 /***/ })
 

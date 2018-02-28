@@ -1,6 +1,10 @@
+const path = require('path');
 const express = require('express');
 const app = express();
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
+
+app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 let users = [];
 let games = {};
@@ -21,6 +25,7 @@ const broadcastGame = (gameID) => {
 }
 
 io.on('connection', (socket) => {
+  console.log('New Socket!');
   users.push({
     socket,
     inGame: false,
@@ -62,4 +67,4 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
  
-app.listen(3000);
+server.listen(3000);
