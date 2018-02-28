@@ -35,11 +35,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    // eslint-disable-next-line no-console
-    const player = game.players.find(p => p.socket === socket.id);
-    game.removePlayer(player);
+    game.removePlayer(socket.id);
 
-    console.log(`Player ${player.username} disconnected.`);  // eslint-disable-line
     console.log('GAME', game); // eslint-disable-line no-console
   });
 });

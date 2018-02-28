@@ -24,6 +24,7 @@ class Game {
   }
 
   addPlayer(player) {
+    if (this.players.length > 1) return this;
     this.players.push(player);
     switch (this.players.length) {
       case 1: return player.setPosition(10, 300);
@@ -33,8 +34,11 @@ class Game {
     return this;
   }
 
-  removePlayer(player) {
-    this.players = this.players.filter(p => p !== player);
+  removePlayer(socketID) {
+    const existingPlayer = this.players.find(p => p.socket === socketID);
+    if (existingPlayer) {
+      this.players = this.players.filter(p => p.socket !== socketID);
+    }
   }
 
   updateBall(x, y) {
