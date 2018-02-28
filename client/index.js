@@ -18,4 +18,3 @@ socket.on('update-client', (newGame) => {
 socket.on('error', err => alert(err));
 
 // gameLoop();
-
